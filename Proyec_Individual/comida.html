@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nación Burger &amp; Grill · Inventario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="t-comida">
+<div class="wrap">
+  <div class="top"><a href="index.html" class="back">&lt; Volver al Portafolio</a><span class="status"><span class="dot"></span>Sistema Online</span></div>
+  <header class="ihead"><h1><i class="fa-solid fa-burger"></i> Nación Burger &amp; Grill</h1><p>Panel GastroBar: insumos perecederos de cocina con indicadores de stock crítico para reponer antes del turno.</p></header>
+  <div class="metrics">
+    <div class="glass metric" data-metric="count:all" style="--ac:var(--flame)"><div class="ic"><i class="fa-solid fa-kitchen-set"></i></div><div><b>0</b><span>Insumos de Cocina</span></div></div>
+    <div class="glass metric" data-metric="Carnes" style="--ac:var(--pink)"><div class="ic"><i class="fa-solid fa-drumstick-bite"></i></div><div><b>0</b><span>Carnes Smash (Packs)</span></div></div>
+    <div class="glass metric" data-metric="low" style="--ac:var(--violet)"><div class="ic"><i class="fa-solid fa-triangle-exclamation"></i></div><div><b>0</b><span>Alertas de Perecederos</span></div></div>
+    </div>
+  <div class="bar"><div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar por SKU, producto o categoría…" aria-label="Buscar"></div>
+    <span class="meta">Mostrando <b id="count">9</b> productos · Valor del almacén: <b id="total">—</b></span></div>
+  <div class="glass tw"><table id="inv">
+    <thead><tr><th>SKU</th><th>Producto</th><th>Categoría</th><th>Stock</th><th>Estado Stock</th><th>Precio</th></tr></thead>
+    <tbody>
+      <tr data-cat="Carnes" data-qty="60" data-min="80" data-price="42.00" data-unit="packs"><td class="sku">CO-01</td><td>Carne Smash Blend 150g</td><td>Carnes</td><td>60 packs</td><td><span class="badge"></span></td><td class="price">Bs 42.00</td></tr>
+      <tr data-cat="Carnes" data-qty="25" data-min="10" data-price="55.00" data-unit="packs"><td class="sku">CO-02</td><td>Bacon Ahumado</td><td>Carnes</td><td>25 packs</td><td><span class="badge"></span></td><td class="price">Bs 55.00</td></tr>
+      <tr data-cat="Panadería" data-qty="90" data-min="70" data-price="3.50" data-unit="uds"><td class="sku">PA-01</td><td>Pan Brioche Artesanal</td><td>Panadería</td><td>90 uds</td><td><span class="badge"></span></td><td class="price">Bs 3.50</td></tr>
+      <tr data-cat="Panadería" data-qty="12" data-min="30" data-price="3.80" data-unit="uds"><td class="sku">PA-02</td><td>Pan Brioche sin Sésamo</td><td>Panadería</td><td>12 uds</td><td><span class="badge"></span></td><td class="price">Bs 3.80</td></tr>
+      <tr data-cat="Lácteos" data-qty="150" data-min="100" data-price="2.20" data-unit="lonchas"><td class="sku">LA-01</td><td>Queso Cheddar Madurado</td><td>Lácteos</td><td>150 lonchas</td><td><span class="badge"></span></td><td class="price">Bs 2.20</td></tr>
+      <tr data-cat="Lácteos" data-qty="2" data-min="5" data-price="140.00" data-unit="kg"><td class="sku">LA-02</td><td>Queso Azul</td><td>Lácteos</td><td>2 kg</td><td><span class="badge"></span></td><td class="price">Bs 140.00</td></tr>
+      <tr data-cat="Salsas" data-qty="6" data-min="4" data-price="48.00" data-unit="L"><td class="sku">SA-01</td><td>Salsa de la Casa</td><td>Salsas</td><td>6 L</td><td><span class="badge"></span></td><td class="price">Bs 48.00</td></tr>
+      <tr data-cat="Salsas" data-qty="3" data-min="5" data-price="52.00" data-unit="L"><td class="sku">SA-02</td><td>Salsa BBQ Ahumada</td><td>Salsas</td><td>3 L</td><td><span class="badge"></span></td><td class="price">Bs 52.00</td></tr>
+      <tr data-cat="Verduras" data-qty="5" data-min="8" data-price="18.00" data-unit="kg"><td class="sku">VE-01</td><td>Lechuga y Tomate Fresco</td><td>Verduras</td><td>5 kg</td><td><span class="badge"></span></td><td class="price">Bs 18.00</td></tr>
+      </tbody></table>
+    <p class="empty" id="empty">Sin resultados. Prueba con otra palabra.</p></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>window.jQuery||document.write('<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"><\/script>')</script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luxe Vision Optometry · Inventario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="t-optica">
+<div class="wrap">
+  <div class="top"><a href="index.html" class="back">&lt; Volver al Portafolio</a><span class="status"><span class="dot"></span>Sistema Online</span></div>
+  <header class="ihead"><h1><i class="fa-solid fa-glasses"></i> Luxe Vision Optometry</h1><p>Panel de control de la óptica: busca en tiempo real y detecta de inmediato qué productos están bajo el stock mínimo.</p></header>
+  <div class="metrics">
+    <div class="glass metric" data-metric="Monturas" style="--ac:var(--cyan)"><div class="ic"><i class="fa-solid fa-glasses"></i></div><div><b>0</b><span>Total Monturas</span></div></div>
+    <div class="glass metric" data-metric="Cristales" style="--ac:var(--violet)"><div class="ic"><i class="fa-solid fa-circle-half-stroke"></i></div><div><b>0</b><span>Cristales HD</span></div></div>
+    <div class="glass metric" data-metric="low" style="--ac:var(--pink)"><div class="ic"><i class="fa-solid fa-triangle-exclamation"></i></div><div><b>0</b><span>Alertas de Stock</span></div></div>
+    </div>
+  <div class="bar"><div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar por SKU, producto o categoría…" aria-label="Buscar"></div>
+    <span class="meta">Mostrando <b id="count">10</b> productos · Valor del almacén: <b id="total">—</b></span></div>
+  <div class="glass tw"><table id="inv">
+    <thead><tr><th>SKU</th><th>Producto</th><th>Categoría</th><th>Stock</th><th>Estado Stock</th><th>Precio</th></tr></thead>
+    <tbody>
+      <tr data-cat="Monturas" data-qty="14" data-min="6" data-price="1,250.00" data-unit="uds"><td class="sku">OP-101</td><td>Montura Titanio Gold</td><td>Monturas</td><td>14 uds</td><td><span class="badge"></span></td><td class="price">Bs 1,250.00</td></tr>
+      <tr data-cat="Monturas" data-qty="4" data-min="6" data-price="780.00" data-unit="uds"><td class="sku">OP-102</td><td>Montura Acetato Carey</td><td>Monturas</td><td>4 uds</td><td><span class="badge"></span></td><td class="price">Bs 780.00</td></tr>
+      <tr data-cat="Monturas" data-qty="9" data-min="5" data-price="640.00" data-unit="uds"><td class="sku">OP-103</td><td>Montura Metal Redonda</td><td>Monturas</td><td>9 uds</td><td><span class="badge"></span></td><td class="price">Bs 640.00</td></tr>
+      <tr data-cat="Cristales" data-qty="40" data-min="15" data-price="320.00" data-unit="pares"><td class="sku">OP-201</td><td>Cristal Antirreflejo 1.56</td><td>Cristales</td><td>40 pares</td><td><span class="badge"></span></td><td class="price">Bs 320.00</td></tr>
+      <tr data-cat="Cristales" data-qty="6" data-min="12" data-price="540.00" data-unit="pares"><td class="sku">OP-202</td><td>Cristal Fotocromático 1.60</td><td>Cristales</td><td>6 pares</td><td><span class="badge"></span></td><td class="price">Bs 540.00</td></tr>
+      <tr data-cat="Cristales" data-qty="22" data-min="10" data-price="410.00" data-unit="pares"><td class="sku">OP-203</td><td>Cristal Filtro Luz Azul HD</td><td>Cristales</td><td>22 pares</td><td><span class="badge"></span></td><td class="price">Bs 410.00</td></tr>
+      <tr data-cat="Polarizados" data-qty="3" data-min="8" data-price="980.00" data-unit="uds"><td class="sku">OP-301</td><td>Lentes Polarizados Ray-Black</td><td>Polarizados</td><td>3 uds</td><td><span class="badge"></span></td><td class="price">Bs 980.00</td></tr>
+      <tr data-cat="Polarizados" data-qty="18" data-min="8" data-price="720.00" data-unit="uds"><td class="sku">OP-302</td><td>Polarizados Deportivos UV400</td><td>Polarizados</td><td>18 uds</td><td><span class="badge"></span></td><td class="price">Bs 720.00</td></tr>
+      <tr data-cat="Contacto" data-qty="2" data-min="10" data-price="160.00" data-unit="cajas"><td class="sku">OP-401</td><td>Lentes de Contacto Mensuales</td><td>Contacto</td><td>2 cajas</td><td><span class="badge"></span></td><td class="price">Bs 160.00</td></tr>
+      <tr data-cat="Contacto" data-qty="16" data-min="10" data-price="210.00" data-unit="cajas"><td class="sku">OP-402</td><td>Lentes de Contacto Diarios</td><td>Contacto</td><td>16 cajas</td><td><span class="badge"></span></td><td class="price">Bs 210.00</td></tr>
+      </tbody></table>
+    <p class="empty" id="empty">Sin resultados. Prueba con otra palabra.</p></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>window.jQuery||document.write('<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"><\/script>')</script>
+<script src="script.js"></script>
+</body>
+</html>

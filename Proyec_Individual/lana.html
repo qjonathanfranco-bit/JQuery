@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lanas del Alto · Inventario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="t-lana">
+<div class="wrap">
+  <div class="top"><a href="index.html" class="back">&lt; Volver al Portafolio</a><span class="status"><span class="dot"></span>Sistema Online</span></div>
+  <header class="ihead"><h1><i class="fa-solid fa-industry"></i> Lanas del Alto</h1><p>Panel industrial de materia prima: kilogramos por lote, bultos de algodón y lana sintética con alertas de reposición.</p></header>
+  <div class="metrics">
+    <div class="glass metric" data-metric="unit:kg" style="--ac:var(--lime)"><div class="ic"><i class="fa-solid fa-weight-hanging"></i></div><div><b>0</b><span>Kilogramos Totales en Almacén</span></div></div>
+    <div class="glass metric" data-metric="count:Alpaca" style="--ac:var(--cyan)"><div class="ic"><i class="fa-solid fa-layer-group"></i></div><div><b>0</b><span>Lotes de Alpaca</span></div></div>
+    <div class="glass metric" data-metric="Industrial" style="--ac:var(--violet)"><div class="ic"><i class="fa-solid fa-gears"></i></div><div><b>0</b><span>Material Industrial (kg)</span></div></div>
+    </div>
+  <div class="bar"><div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar por SKU, producto o categoría…" aria-label="Buscar"></div>
+    <span class="meta">Mostrando <b id="count">8</b> productos · Valor del almacén: <b id="total">—</b></span></div>
+  <div class="glass tw"><table id="inv">
+    <thead><tr><th>SKU</th><th>Producto</th><th>Categoría</th><th>Stock</th><th>Estado Stock</th><th>Precio</th></tr></thead>
+    <tbody>
+      <tr data-cat="Alpaca" data-qty="320" data-min="150" data-price="185.00" data-unit="kg"><td class="sku">LA-001</td><td>Ovillo Alpaca Baby Superfine</td><td>Alpaca</td><td>320 kg</td><td><span class="badge"></span></td><td class="price">Bs 185.00</td></tr>
+      <tr data-cat="Alpaca" data-qty="85" data-min="120" data-price="160.00" data-unit="kg"><td class="sku">LA-002</td><td>Ovillo Alpaca Teñido Índigo</td><td>Alpaca</td><td>85 kg</td><td><span class="badge"></span></td><td class="price">Bs 160.00</td></tr>
+      <tr data-cat="Alpaca" data-qty="210" data-min="100" data-price="150.00" data-unit="kg"><td class="sku">LA-003</td><td>Alpaca Gris Perla</td><td>Alpaca</td><td>210 kg</td><td><span class="badge"></span></td><td class="price">Bs 150.00</td></tr>
+      <tr data-cat="Algodón" data-qty="48" data-min="20" data-price="95.00" data-unit="bultos"><td class="sku">AL-010</td><td>Bobinas Algodón Mercerizado</td><td>Algodón</td><td>48 bultos</td><td><span class="badge"></span></td><td class="price">Bs 95.00</td></tr>
+      <tr data-cat="Algodón" data-qty="9" data-min="20" data-price="110.00" data-unit="bultos"><td class="sku">AL-011</td><td>Algodón Orgánico 24/1</td><td>Algodón</td><td>9 bultos</td><td><span class="badge"></span></td><td class="price">Bs 110.00</td></tr>
+      <tr data-cat="Industrial" data-qty="450" data-min="200" data-price="38.00" data-unit="kg"><td class="sku">SI-020</td><td>Lana Sintética Industrial Acrílica</td><td>Industrial</td><td>450 kg</td><td><span class="badge"></span></td><td class="price">Bs 38.00</td></tr>
+      <tr data-cat="Industrial" data-qty="90" data-min="150" data-price="45.00" data-unit="kg"><td class="sku">SI-021</td><td>Hilado Poliéster Alta Tenacidad</td><td>Industrial</td><td>90 kg</td><td><span class="badge"></span></td><td class="price">Bs 45.00</td></tr>
+      <tr data-cat="Industrial" data-qty="130" data-min="80" data-price="52.00" data-unit="kg"><td class="sku">SI-022</td><td>Nylon Texturizado</td><td>Industrial</td><td>130 kg</td><td><span class="badge"></span></td><td class="price">Bs 52.00</td></tr>
+      </tbody></table>
+    <p class="empty" id="empty">Sin resultados. Prueba con otra palabra.</p></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>window.jQuery||document.write('<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"><\/script>')</script>
+<script src="script.js"></script>
+</body>
+</html>
