@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Inventario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header>
+  <button class="icon-btn burger" id="burger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+  <div class="brand"><div class="logo" id="logo">📦</div><span id="brandName">Mi Negocio</span></div>
+  <div class="spacer"></div>
+  <button class="icon-btn" id="themeBtn" aria-label="Cambiar entre modo día y noche">🌙</button>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="layout">
+  <nav class="side" id="side">
+    <a href="#inicio" data-view="inicio">🏠 Inicio</a>
+    <a href="#inventario" data-view="inventario">📋 Inventario</a>
+    <a href="#movimientos" data-view="movimientos">🔁 Movimientos</a>
+    <a href="#contacto" data-view="contacto">✉️ Contacto</a>
+    <button type="button" id="catToggle">🏷 Categorías ▾</button><div id="catList" style="display:none"></div>
+  </nav>
+  <main>
+    <section class="view" id="v-inicio">
+      <h1>Resumen del inventario</h1>
+      <p class="sub">Estado actual de tu stock en un vistazo.</p>
+      <div class="alert" id="alertBar" style="display:none"></div>
+      <div class="carousel" id="carousel">
+        <div class="track" id="track">
+          <div class="slide s1"><h2>Bienvenido a tu inventario</h2><p>Registra productos, controla entradas y salidas y mantén tu stock al día.</p></div>
+          <div class="slide s2"><h2 id="lowTitle">Stock bajo</h2><p id="lowText"></p></div>
+          <div class="slide s3"><h2 id="valTitle">Valor del inventario</h2><p id="valText"></p></div>
+        </div>
+        <button class="car-btn prev" aria-label="Anterior">‹</button>
+        <button class="car-btn next" aria-label="Siguiente">›</button>
+        <div class="dots" id="dots"></div>
+      </div>
+      <button class="btn sm" id="toggleStats" style="margin-bottom:10px">Ocultar resumen</button>
+      <div class="stats" id="stats"></div>
+      <div class="panel"><h2 style="margin:0 0 6px;font-size:18px">Stock por categoría</h2><div id="catChart"></div></div>
+      <h1 style="font-size:20px">Últimos productos</h1>
+      <div class="grid" id="recent"></div>
+    </section>
+
+    <section class="view" id="v-inventario">
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-end">
+        <div><h1>Inventario</h1><p class="sub">Busca, filtra y administra tus productos.</p></div>
+        <div style="display:flex;gap:8px"><button class="btn" id="toggleF">⚙ Filtros</button><button class="btn" id="exportBtn">⬇ CSV</button><button class="btn primary" id="addBtn">+ Nuevo producto</button></div>
+      </div>
+      <div class="toolbar" id="toolbar">
+        <div class="field"><label for="fq">Buscar</label><input id="fq" type="search" placeholder="Nombre o SKU"></div>
+        <div class="field"><label for="fcat">Categoría</label><select id="fcat"></select></div>
+        <div class="field"><label for="fst">Estado</label><select id="fst"><option value="">Todos</option><option value="ok">Disponible</option><option value="low">Stock bajo</option><option value="out">Agotado</option><option value="fav">⭐ Favoritos</option></select></div>
+        <div class="field"><label for="fsort">Ordenar</label><select id="fsort"><option value="name">Nombre A-Z</option><option value="price-asc">Precio menor</option><option value="price-desc">Precio mayor</option><option value="stock-asc">Menos stock</option></select></div>
+        <div class="field"><label for="fprice">Precio máximo: <span id="pv">todos</span></label><input id="fprice" type="range" min="0" max="100" value="100"></div>
+        <div class="field" style="flex:0 0 auto;align-self:end"><button class="btn" id="clearF">Limpiar</button></div>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section class="view" id="v-movimientos">
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-end">
+        <div><h1>Movimientos</h1><p class="sub">Historial de entradas y salidas.</p></div>
+        <div style="display:flex;gap:8px"><button class="btn danger" id="clearMoves">Vaciar historial</button><button class="btn primary" id="moveBtn">+ Registrar movimiento</button></div>
+      </div>
+      <div class="tbl"><table><thead><tr><th>Fecha</th><th>Producto</th><th>Tipo</th><th>Cantidad</th><th>Nota</th></tr></thead><tbody id="moves"></tbody></table></div>
+    </section>
+  <section class="view" id="v-contacto">
+      <h1>Contacto</h1><p class="sub">Datos de la empresa y formas de escribirnos.</p>
+      <div class="two">
+        <div>
+          <div class="panel"><button class="btn sm" id="toggleCo" type="button">Datos de la empresa ▾</button><ul class="company" id="coBox"></ul></div>
+          <div class="panel"><button class="btn sm" id="toggleSoc" type="button">Redes sociales ▾</button><div class="socials" id="socBox"></div></div>
+          <div class="panel faq"><h2 style="margin:0 0 6px;font-size:18px">Preguntas frecuentes</h2>
+            <button class="q" type="button">¿Cómo registro una entrada o salida?</button><div class="a" style="display:none">En Movimientos pulsa Registrar movimiento, elige el producto, el tipo y la cantidad.</div>
+            <button class="q" type="button">¿Cuándo aparece la alerta de stock bajo?</button><div class="a" style="display:none">Cuando las unidades llegan al stock mínimo que definiste para ese producto.</div>
+            <button class="q" type="button">¿Dónde se guardan mis datos?</button><div class="a" style="display:none">En tu propio navegador, así que no se pierden al recargar la página.</div></div>
+        </div>
+        <form class="panel" id="fCont" novalidate>
+          <h2 style="margin-top:0">Escríbenos</h2>
+          <div class="fgroup"><label for="cname">Nombre completo</label><input id="cname" required maxlength="40"><div class="err"></div></div>
+          <div class="row">
+            <div class="fgroup"><label for="cmail">Correo</label><input id="cmail" type="email" required><div class="err"></div></div>
+            <div class="fgroup"><label for="cphone">Teléfono</label><input id="cphone" type="tel" required><div class="err"></div></div>
+          </div>
+          <div class="fgroup"><label for="cmsg">Mensaje</label><textarea id="cmsg" rows="4" required maxlength="300"></textarea><div class="cnt" id="cnt">0/300</div><div class="err"></div></div>
+          <div class="ok" id="okMsg" style="display:none">✅ Gracias, recibimos tu mensaje y te responderemos pronto.</div>
+          <div class="foot"><button class="btn primary">Enviar mensaje</button></div>
+        </form>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer class="sitefoot"><span id="fInfo"></span><div class="socials"></div></footer>
+
+<div class="modal" id="mProd"><form class="dialog" id="fProd" novalidate>
+  <h2 id="mProdTitle">Nuevo producto</h2>
+  <div class="fgroup"><label for="pname">Nombre</label><input id="pname" required minlength="3" maxlength="40"><div class="err"></div></div>
+  <div class="row">
+    <div class="fgroup"><label for="psku">SKU</label><input id="psku" required placeholder="ABC-001"><div class="err"></div></div>
+    <div class="fgroup"><label for="pcat">Categoría</label><input id="pcat" required list="cats" maxlength="25"><datalist id="cats"></datalist><div class="err"></div></div>
+  </div>
+  <div class="row">
+    <div class="fgroup"><label for="pprice">Precio</label><input id="pprice" type="number" step="0.01" min="0.01" required><div class="err"></div></div>
+    <div class="fgroup"><label for="pstock">Stock actual</label><input id="pstock" type="number" step="1" min="0" required><div class="err"></div></div>
+  </div>
+  <div class="fgroup"><label for="pmin">Stock mínimo (alerta)</label><input id="pmin" type="number" step="1" min="0" required><div class="err"></div></div>
+  <div class="fgroup"><label for="pdesc">Descripción (opcional)</label><textarea id="pdesc" rows="2" maxlength="120"></textarea></div>
+  <div class="fgroup"><label>Ícono y color</label>
+    <div class="row"><input id="pemoji" maxlength="2" value="📦" aria-label="Ícono"><div class="swatches" id="swatches"></div></div></div>
+  <div class="foot"><button type="button" class="btn" data-close>Cancelar</button><button class="btn primary">Guardar producto</button></div>
+</form></div>
+
+<div class="modal" id="mMove"><form class="dialog" id="fMove" novalidate>
+  <h2>Registrar movimiento</h2>
+  <div class="fgroup"><label for="mprod">Producto</label><select id="mprod" required></select><div class="err"></div></div>
+  <div class="row">
+    <div class="fgroup"><label for="mtype">Tipo</label><select id="mtype"><option value="in">Entrada</option><option value="out">Salida</option></select></div>
+    <div class="fgroup"><label for="mqty">Cantidad</label><input id="mqty" type="number" step="1" min="1" required><div class="err"></div></div>
+  </div>
+  <div class="fgroup"><label for="mnote">Nota (opcional)</label><input id="mnote" maxlength="60" placeholder="Compra, venta, ajuste..."></div>
+  <div class="foot"><button type="button" class="btn" data-close>Cancelar</button><button class="btn primary">Registrar</button></div>
+</form></div>
+<button class="icon-btn" id="toTop" style="display:none" aria-label="Volver arriba">↑</button>
+<div id="toast" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
