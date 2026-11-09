@@ -1,0 +1,474 @@
+:root {
+    --bg-color: #030712;
+    --card-bg: rgba(15, 23, 42, 0.88);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-color: #f8fafc;
+    --text-muted: #94a3b8;
+    --box-bg: rgba(30, 41, 59, 0.55);
+    --border-color: rgba(255, 255, 255, 0.08);
+
+    --accent-wally: #38bdf8;
+    --wally-gradient: linear-gradient(135deg, #0284c7, #38bdf8);
+    --wally-glow: rgba(56, 189, 248, 0.3);
+
+    --accent-futsal: #4ade80;
+    --futsal-gradient: linear-gradient(135deg, #16a34a, #4ade80);
+    --futsal-glow: rgba(74, 222, 128, 0.3);
+
+    --accent-voley: #fbbf24;
+    --voley-gradient: linear-gradient(135deg, #d97706, #fbbf24);
+    --voley-glow: rgba(251, 191, 36, 0.3);
+
+    --active-accent: var(--accent-wally);
+    --active-gradient: var(--wally-gradient);
+    --active-glow: var(--wally-glow);
+}
+
+/* SÍ FUNCIONA EL MODO CLARO */
+body.light-theme {
+    --bg-color: #e2e8f0;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --glass-border: rgba(0, 0, 0, 0.12);
+    --text-color: #0f172a;
+    --text-muted: #475569;
+    --box-bg: rgba(241, 245, 249, 0.95);
+    --border-color: rgba(0, 0, 0, 0.12);
+}
+
+body.theme-wally { --active-accent: var(--accent-wally); --active-gradient: var(--wally-gradient); --active-glow: var(--wally-glow); }
+body.theme-futsal { --active-accent: var(--accent-futsal); --active-gradient: var(--futsal-gradient); --active-glow: var(--futsal-glow); }
+body.theme-voley { --active-accent: var(--accent-voley); --active-gradient: var(--voley-gradient); --active-glow: var(--voley-glow); }
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-color);
+    background-image: 
+        radial-gradient(circle at 10% 10%, var(--active-glow) 0px, transparent 40%),
+        radial-gradient(circle at 90% 90%, rgba(99, 102, 241, 0.1) 0px, transparent 50%);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* EFECTO DE GLOBOS FLOTANTES */
+.floating-balloon {
+    position: fixed;
+    pointer-events: none;
+    font-size: 20px;
+    user-select: none;
+    z-index: 9999;
+    animation: balloonFloat 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes balloonFloat {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6) translateY(0);
+    }
+    50% {
+        opacity: 0.9;
+        transform: translate(-50%, -50%) scale(1.2) translateY(-40px);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9) translateY(-90px);
+    }
+}
+
+/* NAVBAR */
+.navbar-compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    padding: 0 20px;
+    height: 48px;
+    border-bottom: 2px solid var(--active-accent);
+    box-shadow: 0 4px 15px var(--active-glow);
+}
+
+.logo { font-size: 17px; font-weight: 900; }
+.logo span { color: var(--active-accent); }
+.beta-tag { font-size: 8px; background: var(--active-gradient); color: #fff; padding: 2px 5px; border-radius: 4px; vertical-align: middle; margin-left: 5px; font-family: 'Rajdhani', sans-serif; }
+
+.nav-list { list-style: none; display: flex; gap: 8px; margin: 0; padding: 0; }
+.nav-link { 
+    color: var(--text-muted); 
+    text-decoration: none; 
+    font-weight: 800; 
+    font-size: 12px; 
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+}
+.nav-link:hover { color: var(--text-color); background: rgba(255, 255, 255, 0.08); }
+.nav-link.active { color: #fff; background: var(--active-gradient); box-shadow: 0 3px 10px var(--active-glow); }
+
+.theme-btn {
+    background: var(--box-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* LAYOUT GENERAL */
+.dashboard-wrapper {
+    height: calc(100vh - 48px);
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-section { width: 100%; height: 100%; max-width: 1200px; }
+
+.glass-panel {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    border-radius: 12px;
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* TOP ROW */
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--box-bg);
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.canchas-row { display: flex; gap: 8px; flex: 1; }
+
+.cancha-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 4px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancha-chip:hover { border-color: var(--active-accent); }
+.cancha-chip.selected { 
+    border-color: var(--active-accent); 
+    background: rgba(255, 255, 255, 0.05); 
+    box-shadow: 0 0 12px var(--active-glow); 
+}
+.cancha-chip.hidden { display: none !important; }
+
+/* MINIATURAS MEDIANAS */
+.chip-avatar { position: relative; width: 36px; height: 28px; }
+.chip-img { width: 36px; height: 28px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border-color); }
+.badge-lvl {
+    position: absolute;
+    bottom: -3px;
+    right: -3px;
+    background: var(--active-gradient);
+    color: white;
+    font-size: 8px;
+    font-weight: 900;
+    padding: 0 3px;
+    border-radius: 3px;
+}
+
+.chip-info strong { display: block; font-size: 11px; font-weight: 800; font-family: 'Rajdhani', sans-serif; }
+.chip-info small { font-size: 9px; color: var(--text-muted); }
+
+.btn-ver-todas {
+    background: var(--active-gradient);
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 10px;
+    cursor: pointer;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* HEADER FUTSAL / VÓLEY */
+.single-cancha-header { display: flex; align-items: center; gap: 8px; }
+.cancha-thumb { width: 42px; height: 30px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border-color); }
+.single-cancha-text strong { display: block; font-size: 12px; font-weight: 800; color: var(--active-accent); font-family: 'Rajdhani', sans-serif; }
+.single-cancha-text small { font-size: 10px; color: var(--text-muted); }
+
+/* STATUS Y TIMER */
+.timer-corner-box { display: flex; align-items: center; gap: 6px; }
+
+.status-pill {
+    padding: 3px 8px;
+    border-radius: 15px;
+    font-size: 10px;
+    font-weight: 800;
+}
+.status-pill.disponible { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+.status-pill.ocupado { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+.btn-timer-mini {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    color: #f59e0b;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.timer-mini-display {
+    background: rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+    border: 1px solid #f59e0b;
+    padding: 3px 6px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+/* GRID 3 COLUMNAS COMPACTO */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr 1fr;
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+}
+
+.col-section {
+    background: var(--box-bg);
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+}
+
+.col-title { 
+    font-family: 'Rajdhani', sans-serif;
+    margin: 0; 
+    font-size: 12px; 
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase; 
+    color: var(--active-accent); 
+}
+
+.section-sublabel { display: block; font-size: 9.5px; font-weight: 700; color: var(--text-muted); margin-bottom: 3px; text-transform: uppercase; }
+
+/* SLOTS HORARIOS */
+.horarios-container { margin: 2px 0; }
+.slots-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+.slot-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 10.5px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+.slot-btn:hover:not(:disabled) { border-color: var(--active-accent); }
+.slot-btn.active { background: var(--active-gradient); color: white; border-color: transparent; }
+.slot-btn.ocupado { opacity: 0.4; cursor: not-allowed; background: rgba(239, 68, 68, 0.1); }
+
+/* SELECTOR MODO */
+.modo-pago-selector { display: flex; gap: 5px; }
+.btn-modo {
+    flex: 1;
+    padding: 5px;
+    font-size: 10.5px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-muted);
+    border-radius: 6px;
+    font-weight: 800;
+    font-family: 'Rajdhani', sans-serif;
+    cursor: pointer;
+}
+.btn-modo.active { background: var(--active-gradient); color: white; border-color: transparent; }
+
+.input-compact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.field-mini label { display: block; font-size: 9.5px; font-weight: 700; color: var(--text-muted); margin-bottom: 2px; }
+.field-mini input, .field-mini-block input {
+    width: 100%;
+    padding: 5px;
+    font-size: 11px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 6px;
+    outline: none;
+}
+
+.info-card-conjunto {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--active-accent);
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 10.5px;
+    line-height: 1.4;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+.info-card-conjunto strong { color: var(--active-accent); }
+
+.summary-box {
+    background: var(--card-bg);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 10.5px;
+    border-left: 3px solid var(--active-accent);
+}
+.summary-box p { margin: 2px 0; }
+.highlight-text { color: var(--active-accent); font-weight: 800; }
+
+/* JUGADORES */
+.col-header-flex { display: flex; justify-content: space-between; align-items: center; }
+.badge-count { font-size: 10px; background: rgba(255, 255, 255, 0.1); color: var(--active-accent); padding: 1px 6px; border-radius: 4px; font-weight: 800; }
+
+.input-group-mini { display: flex; gap: 5px; }
+.input-group-mini input {
+    flex: 1;
+    padding: 5px 8px;
+    font-size: 11px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 6px;
+    outline: none;
+}
+.input-group-mini button {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.scroll-list-wrapper { flex: 1; overflow-y: auto; padding-right: 2px; margin-top: 4px; }
+.player-list-mini { list-style: none; padding: 0; margin: 0; }
+.player-list-mini li {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 5px 8px;
+    margin-bottom: 4px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10.5px;
+}
+
+.btn-check-asistencia, .btn-check-pago {
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 9.5px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+}
+.btn-check-asistencia.confirmado { background: #3b82f6; color: white; }
+.btn-check-pago.pagado { background: #10b981; color: white; }
+
+/* PASARELA */
+.payment-mini-options { display: flex; gap: 5px; }
+.pay-btn-mini {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-muted);
+    font-weight: 800;
+    border-radius: 6px;
+    font-size: 10.5px;
+    cursor: pointer;
+}
+.pay-btn-mini.active-pay { background: rgba(99, 102, 241, 0.2); color: #818cf8; border-color: #6366f1; }
+
+.qr-box-mini {
+    background: var(--card-bg);
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px dashed rgba(99, 102, 241, 0.4);
+    margin-top: 4px;
+}
+.qr-code-placeholder-mini {
+    background: #ffffff;
+    color: #0f172a;
+    padding: 6px;
+    font-size: 9.5px;
+    font-weight: 900;
+    border-radius: 4px;
+    margin-bottom: 3px;
+}
+.qr-fake-art {
+    width: 28px;
+    height: 28px;
+    margin: 0 auto 2px auto;
+    background: repeating-linear-gradient(45deg, #0f172a, #0f172a 3px, #fff 3px, #fff 6px);
+    border-radius: 3px;
+}
+
+.confirm-btn-mini {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    font-size: 10px;
+    border-radius: 4px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.finalizar-container-mini { margin-top: auto; }
+.btn-finalizar-reserva-mini {
+    width: 100%;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: 900;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
