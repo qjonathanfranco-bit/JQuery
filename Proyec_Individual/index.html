@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INVENTORYLAB · Sistemas de Inventario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav" id="nav"><div class="wrap">
+  <a href="#inicio" class="logo"><i class="fa-solid fa-cube"></i>INVENTORYLAB</a>
+  <ul class="menu" id="menu">
+    <li><a href="#inicio">Inicio</a></li><li><a href="#capacidades">Especialidades</a></li><li><a href="#proyectos">Proyectos</a></li><li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <span class="status"><span class="dot"></span>Sistemas Online</span>
+  <button class="burger" id="burger" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
+</div></header>
+
+<main>
+<section class="hero" id="inicio"><div class="wrap">
+  <div>
+    <span class="badge-top"><span class="dot"></span>3 sistemas en producción</span>
+    <h1 class="grad">Sistemas de Inventario Multisectoriales</h1>
+    <p>Controla stock, detecta faltantes y valúa tu almacén en tiempo real. Diseñados a medida para ópticas, fábricas textiles y restaurantes.</p>
+    <a href="#proyectos" class="btn fill" style="--ac:var(--lime);--ac2:var(--cyan)">Explorar Proyectos ↗</a>
+  </div>
+  <div class="float"><div class="glass dash tilt">
+    <div class="dash-h"><i></i><i></i><i></i></div>
+    <div class="kpis"><div><b>1.2k</b><span>Productos</span></div><div><b>98%</b><span>Disponible</span></div><div><b>7</b><span>Alertas</span></div></div>
+    <div class="bars"><i style="--h:45%"></i><i style="--h:70%"></i><i style="--h:55%"></i><i style="--h:90%"></i><i style="--h:60%"></i><i style="--h:80%"></i><i style="--h:100%"></i></div>
+  </div></div>
+</div></section>
+
+<section id="capacidades"><div class="wrap">
+  <div class="sec-h"><h2>Especialidades</h2><p>Cuatro capacidades técnicas presentes en cada sistema.</p></div>
+  <div class="caps">
+    <article class="glass cap" style="--ac:var(--cyan)"><i class="fa-solid fa-bolt"></i><div class="n">01</div><h3>Real-time Filter</h3><p>Búsqueda instantánea por producto, código o categoría con jQuery.</p></article>
+    <article class="glass cap" style="--ac:var(--pink)"><i class="fa-solid fa-triangle-exclamation"></i><div class="n">02</div><h3>Stock Warning</h3><p>Alertas visuales cuando un producto cae bajo su stock mínimo.</p></article>
+    <article class="glass cap" style="--ac:var(--lime)"><i class="fa-solid fa-mobile-screen"></i><div class="n">03</div><h3>UI Adaptativa</h3><p>Se ve y funciona igual de bien en móvil, tablet y escritorio.</p></article>
+    <article class="glass cap" style="--ac:var(--violet)"><i class="fa-solid fa-coins"></i><div class="n">04</div><h3>Valuación de Almacén</h3><p>Calcula el valor total del inventario a partir de stock y precios.</p></article>
+  </div>
+</div></section>
+
+<section id="proyectos"><div class="wrap">
+  <div class="sec-h"><h2>Proyectos Destacados</h2><p>Tres empresas, tres sistemas independientes. Abre cualquiera.</p></div>
+  <div class="projs">
+    <article class="glass proj tilt" style="--ac:var(--cyan)"><div class="ban"><i class="fa-solid fa-glasses"></i></div><div class="body">
+      <h3>Luxe Vision Optometry</h3><p>Monturas, cristales, lentes polarizados y de contacto con control de stock y precios.</p>
+      <div class="chips"><em>Óptica</em><em>Buscador</em><em>Alertas</em></div><a href="optica.html" class="btn">Visitar Sistema ↗</a></div></article>
+    <article class="glass proj tilt" style="--ac:var(--lime)"><div class="ban"><i class="fa-solid fa-industry"></i></div><div class="body">
+      <h3>Lanas del Alto</h3><p>Kilogramos de alpaca, bultos de algodón y lana industrial por lote.</p>
+      <div class="chips"><em>Textil</em><em>Kilogramos</em><em>Lotes</em></div><a href="lana.html" class="btn">Visitar Sistema ↗</a></div></article>
+    <article class="glass proj tilt" style="--ac:var(--pink)"><div class="ban"><i class="fa-solid fa-burger"></i></div><div class="body">
+      <h3>Nación Burger &amp; Grill</h3><p>Insumos perecederos de cocina con indicadores de stock crítico.</p>
+      <div class="chips"><em>GastroBar</em><em>Perecederos</em><em>Cocina</em></div><a href="comida.html" class="btn">Visitar Sistema ↗</a></div></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-h"><h2>Clientes</h2><p>Lo que dicen los negocios que ya usan los sistemas.</p></div>
+  <div class="car"><div class="car-t">
+    <div><figure class="glass tc"><q>Sabemos al instante qué monturas se agotan. Dejamos de perder ventas.</q><b>Marcela R.</b><span>Gerente · Luxe Vision</span></figure></div>
+    <div><figure class="glass tc"><q>Controlamos los kilos de alpaca por lote y reponemos antes de parar la máquina.</q><b>Roberto Q.</b><span>Producción · Lanas del Alto</span></figure></div>
+    <div><figure class="glass tc"><q>Las alertas de perecederos nos evitan quedarnos sin carne o pan en pleno turno.</q><b>Daniela M.</b><span>Dueña · Nación Burger</span></figure></div>
+    <div><figure class="glass tc"><q>El buscador encuentra cualquier lente en segundos. Mi equipo lo aprendió en un día.</q><b>Andrés P.</b><span>Optometrista · Luxe Vision</span></figure></div>
+  </div></div>
+</div></section>
+
+<section id="contacto"><div class="wrap"><div class="glass contact">
+  <div><h2 style="font-size:2.4rem">Hablemos</h2><p style="color:var(--muted);margin-top:12px">Cuéntame qué necesita tu negocio y te envío una propuesta.</p>
+    <ul><li><i class="fa-solid fa-location-dot"></i>La Paz, Bolivia</li><li><i class="fa-solid fa-envelope"></i>contacto@inventorylab.com</li></ul></div>
+  <form id="contactForm" novalidate>
+    <input id="cName" placeholder="Tu nombre"><input id="cMail" type="email" placeholder="Tu correo"><textarea id="cMsg" placeholder="¿Qué necesitas?"></textarea>
+    <button class="btn fill" id="cBtn" style="--ac:var(--cyan);--ac2:var(--violet);justify-content:center">Enviar mensaje <i class="fa-solid fa-paper-plane"></i></button>
+    <div class="fb" id="fb"></div>
+  </form>
+</div></div></section>
+</main>
+
+<footer><div class="wrap"><span>© <span id="yr">2026</span> INVENTORYLAB · Todos los derechos reservados</span><a href="#inicio"><i class="fa-solid fa-arrow-up"></i> Volver arriba</a></div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>window.jQuery||document.write('<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"><\/script>')</script>
+<script src="script.js"></script>
+</body>
+</html>
