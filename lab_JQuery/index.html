@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeporZone - Arena Gaming Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body class="theme-wally">
+
+    <!-- Header Gaming Minimalista -->
+    <header class="navbar-compact">
+        <div class="logo">⚡ <span>DEPOR</span>ZONE <small class="beta-tag">ARENA EVENT</small></div>
+        <ul class="nav-list">
+            <li><a href="#" class="nav-link active spawn-balloon" data-sport="wally"><span class="nav-icon">🏐</span> WALLY ARENA</a></li>
+            <li><a href="#" class="nav-link spawn-balloon" data-sport="futsal"><span class="nav-icon">⚽</span> FUTSAL PRO</a></li>
+            <li><a href="#" class="nav-link spawn-balloon" data-sport="voley"><span class="nav-icon">🏐</span> VÓLEY MASTER</a></li>
+        </ul>
+        <button id="theme-toggle" class="theme-btn spawn-balloon">🌙 Modo Oscuro</button>
+    </header>
+
+    <main class="dashboard-wrapper">
+        
+        <!-- ================= SECCIÓN WALLY ================= -->
+        <section id="wally" class="content-section sport-tab-active">
+            <div class="dashboard-card glass-panel">
+                
+                <!-- TOP ROW: Canchas -->
+                <div class="top-row">
+                    <div class="canchas-row" id="canchas-container-wally">
+                        <div class="cancha-chip selected spawn-balloon" data-cancha="A" data-precio="40">
+                            <div class="chip-avatar">
+                                <img src="img/vol/A.jpeg" alt="Cancha A" class="chip-img">
+                                <span class="badge-lvl">A</span>
+                            </div>
+                            <div class="chip-info">
+                                <strong>CANCHA A</strong>
+                                <small>40 Bs • Techada</small>
+                            </div>
+                        </div>
+                        <div class="cancha-chip spawn-balloon" data-cancha="B" data-precio="45">
+                            <div class="chip-avatar">
+                                <img src="img/vol/B.jpeg" alt="Cancha B" class="chip-img">
+                                <span class="badge-lvl">B</span>
+                            </div>
+                            <div class="chip-info">
+                                <strong>CANCHA B</strong>
+                                <small>45 Bs • Blindex</small>
+                            </div>
+                        </div>
+                        <div class="cancha-chip spawn-balloon" data-cancha="C" data-precio="50">
+                            <div class="chip-avatar">
+                                <img src="img/vol/C.jpeg" alt="Cancha C" class="chip-img">
+                                <span class="badge-lvl">C</span>
+                            </div>
+                            <div class="chip-info">
+                                <strong>CANCHA C</strong>
+                                <small>50 Bs • Pro</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="btn-ver-todas-wally" class="btn-ver-todas spawn-balloon" style="display:none;">↩ TODAS</button>
+
+                    <div class="timer-corner-box">
+                        <div id="status-cancha-wally" class="status-pill disponible">
+                            <span id="lbl-status-wally">🟢 Libre</span>
+                            <span id="timer-ocupado-wally" class="timer-tag" style="display:none;"> | ⏳ 00:00:00</span>
+                        </div>
+                        <button id="btn-iniciar-timer-wally" class="btn-timer-mini spawn-balloon">⏱️ 10 min</button>
+                        <div id="display-timer-confirm-wally" class="timer-mini-display" style="display:none;">
+                            ⏳ <strong id="time-left-wally">10:00</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRID 3 COLUMNAS -->
+                <div class="grid-layout">
+                    
+                    <!-- COL 1: CONFIGURACIÓN Y HORARIOS -->
+                    <div class="col-section">
+                        <h4 class="col-title">⚙️ 1. Horarios y Modo</h4>
+                        
+                        <div class="modo-pago-selector">
+                            <button class="btn-modo active spawn-balloon" data-sport="wally" data-modo="individual">👥 Individual</button>
+                            <button class="btn-modo spawn-balloon" data-sport="wally" data-modo="conjunto">💳 Conjunto</button>
+                        </div>
+
+                        <div class="input-compact-grid">
+                            <div class="field-mini"><label>📅 Fecha:</label><input type="date" id="fecha-wally"></div>
+                            <div class="field-mini"><label>⏰ Hora:</label><input type="time" id="hora-wally" readonly></div>
+                        </div>
+
+                        <div class="horarios-container">
+                            <label class="section-sublabel">⚡ Slots Disponibles:</label>
+                            <div class="slots-grid" data-sport="wally">
+                                <button class="slot-btn active spawn-balloon" data-time="14:00">14:00</button>
+                                <button class="slot-btn spawn-balloon" data-time="15:00">15:00</button>
+                                <button class="slot-btn spawn-balloon" data-time="16:00">16:00</button>
+                                <button class="slot-btn ocupado" disabled>17:00 (Ocupado)</button>
+                                <button class="slot-btn spawn-balloon" data-time="18:00">18:00</button>
+                                <button class="slot-btn spawn-balloon" data-time="19:00">19:00</button>
+                            </div>
+                        </div>
+
+                        <div id="summary-wally" class="summary-box">
+                            <p>Cancha: <strong class="highlight-text">Wally <span id="lbl-cancha-wally">A</span></strong></p>
+                            <p id="row-cuota-wally">Cuota persona: <strong id="cuota-persona-wally">0.00</strong> Bs</p>
+                            <p id="row-total-wally" style="display:none;">Monto Total: <strong id="monto-total-conjunto-wally">40.00</strong> Bs</p>
+                        </div>
+                    </div>
+
+                    <!-- COL 2: JUGADORES VS CAPITÁN -->
+                    <div class="col-section">
+                        <div id="panel-individual-wally" class="sub-panel-active">
+                            <div class="col-header-flex">
+                                <h4 class="col-title">📋 2. Integrantes</h4>
+                                <span class="badge-count"><span id="total-jugadores-wally">0</span>/16</span>
+                            </div>
+                            <div class="input-group-mini">
+                                <input type="text" id="nombre-jugador-wally" placeholder="Nombre jugador..." maxlength="25">
+                                <button id="btn-anotar-wally" class="spawn-balloon">➕</button>
+                            </div>
+                            <div class="scroll-list-wrapper">
+                                <ul id="lista-jugadores-wally" class="player-list-mini"></ul>
+                            </div>
+                        </div>
+
+                        <div id="panel-conjunto-wally" class="sub-panel-hidden" style="display:none;">
+                            <h4 class="col-title">👑 2. Responsable / Capitán</h4>
+                            <div class="field-mini-block">
+                                <label>Nombre del Capitán / Equipo:</label>
+                                <input type="text" id="nombre-capitan-wally" placeholder="Ej. Team Inmortals" maxlength="35">
+                            </div>
+                            <div class="info-card-conjunto">
+                                <p>⚡ <strong>Pago Directo:</strong> El responsable cubre el total del alquiler sin registrar 16 personas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COL 3: PASARELA -->
+                    <div class="col-section">
+                        <h4 class="col-title">💳 3. Confirmación</h4>
+                        <div class="payment-mini-options">
+                            <button class="pay-btn-mini active-pay spawn-balloon" data-sport="wally" data-method="qr">📲 QR</button>
+                            <button class="pay-btn-mini spawn-balloon" data-sport="wally" data-method="efectivo">💵 Efectivo</button>
+                        </div>
+                        <div id="qr-container-wally" class="qr-box-mini">
+                            <div class="qr-code-placeholder-mini">
+                                <div class="qr-fake-art"></div>
+                                <span>[ 📷 ESCANEAR QR ]</span>
+                            </div>
+                            <p>Total a Pagar: <strong id="monto-qr-wally">0.00</strong> Bs</p>
+                            <button class="confirm-btn-mini spawn-balloon" data-sport="wally">✔ Validar QR</button>
+                        </div>
+                        <div class="finalizar-container-mini">
+                            <button id="btn-finalizar-wally" class="btn-finalizar-reserva-mini spawn-balloon">🏆 RESERVAR AHORA</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN FUTSAL ================= -->
+        <section id="futsal" class="content-section" style="display: none;">
+            <div class="dashboard-card glass-panel">
+                <div class="top-row">
+                    <div class="single-cancha-header">
+                        <img src="img/vol/CANCHA.jpeg" alt="Futsal Arena" class="cancha-thumb">
+                        <div class="single-cancha-text">
+                            <strong>⚽ ARENA FUTSAL SINTÉTICA</strong>
+                            <small>120 Bs/hora • Iluminación LED Pro</small>
+                        </div>
+                    </div>
+                    <div class="timer-corner-box">
+                        <div id="status-cancha-futsal" class="status-pill disponible">
+                            <span id="lbl-status-futsal">🟢 Libre</span>
+                            <span id="timer-ocupado-futsal" class="timer-tag" style="display:none;"> | ⏳ 00:00:00</span>
+                        </div>
+                        <button id="btn-iniciar-timer-futsal" class="btn-timer-mini spawn-balloon">⏱️ 10 min</button>
+                        <div id="display-timer-confirm-futsal" class="timer-mini-display" style="display:none;">
+                            ⏳ <strong id="time-left-futsal">10:00</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-layout">
+                    <div class="col-section">
+                        <h4 class="col-title">⚙️ 1. Horarios y Modo</h4>
+                        <div class="modo-pago-selector">
+                            <button class="btn-modo active spawn-balloon" data-sport="futsal" data-modo="individual">👥 Individual</button>
+                            <button class="btn-modo spawn-balloon" data-sport="futsal" data-modo="conjunto">💳 Conjunto</button>
+                        </div>
+                        <div class="input-compact-grid">
+                            <div class="field-mini"><label>📅 Fecha:</label><input type="date" id="fecha-futsal"></div>
+                            <div class="field-mini"><label>⏰ Hora:</label><input type="time" id="hora-futsal" readonly></div>
+                        </div>
+
+                        <div class="horarios-container">
+                            <label class="section-sublabel">⚡ Slots Disponibles:</label>
+                            <div class="slots-grid" data-sport="futsal">
+                                <button class="slot-btn active spawn-balloon" data-time="18:00">18:00</button>
+                                <button class="slot-btn spawn-balloon" data-time="19:00">19:00</button>
+                                <button class="slot-btn ocupado" disabled>20:00 (Ocupado)</button>
+                                <button class="slot-btn spawn-balloon" data-time="21:00">21:00</button>
+                            </div>
+                        </div>
+
+                        <div id="summary-futsal" class="summary-box">
+                            <p id="row-cuota-futsal">Cuota: <strong id="cuota-persona-futsal">0.00</strong> Bs</p>
+                            <p id="row-total-futsal" style="display:none;">Total Cancha: <strong id="monto-total-conjunto-futsal">120.00</strong> Bs</p>
+                        </div>
+                    </div>
+
+                    <div class="col-section">
+                        <div id="panel-individual-futsal" class="sub-panel-active">
+                            <div class="col-header-flex">
+                                <h4 class="col-title">📋 2. Integrantes</h4>
+                                <span class="badge-count"><span id="total-jugadores-futsal">0</span>/16</span>
+                            </div>
+                            <div class="input-group-mini">
+                                <input type="text" id="nombre-jugador-futsal" placeholder="Nombre jugador..." maxlength="25">
+                                <button id="btn-anotar-futsal" class="spawn-balloon">➕</button>
+                            </div>
+                            <div class="scroll-list-wrapper">
+                                <ul id="lista-jugadores-futsal" class="player-list-mini"></ul>
+                            </div>
+                        </div>
+                        <div id="panel-conjunto-futsal" class="sub-panel-hidden" style="display:none;">
+                            <h4 class="col-title">👑 2. Responsable / Capitán</h4>
+                            <div class="field-mini-block">
+                                <label>Nombre del Capitán / Equipo:</label>
+                                <input type="text" id="nombre-capitan-futsal" placeholder="Ej. Real Futsal" maxlength="35">
+                            </div>
+                            <div class="info-card-conjunto">
+                                <p>⚡ <strong>Pago Directo:</strong> El responsable cubre el total del alquiler.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-section">
+                        <h4 class="col-title">💳 3. Confirmación</h4>
+                        <div class="payment-mini-options">
+                            <button class="pay-btn-mini active-pay spawn-balloon" data-sport="futsal" data-method="qr">📲 QR</button>
+                            <button class="pay-btn-mini spawn-balloon" data-sport="futsal" data-method="efectivo">💵 Efectivo</button>
+                        </div>
+                        <div id="qr-container-futsal" class="qr-box-mini">
+                            <div class="qr-code-placeholder-mini">
+                                <div class="qr-fake-art"></div>
+                                <span>[ 📷 ESCANEAR QR ]</span>
+                            </div>
+                            <p>Total a Pagar: <strong id="monto-qr-futsal">0.00</strong> Bs</p>
+                            <button class="confirm-btn-mini spawn-balloon" data-sport="futsal">✔ Validar QR</button>
+                        </div>
+                        <div class="finalizar-container-mini">
+                            <button id="btn-finalizar-futsal" class="btn-finalizar-reserva-mini spawn-balloon">🏆 RESERVAR AHORA</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN VÓLEY ================= -->
+        <section id="voley" class="content-section" style="display: none;">
+            <div class="dashboard-card glass-panel">
+                <div class="top-row">
+                    <div class="single-cancha-header">
+                        <img src="img/vol/CANCHA.jpeg" alt="Vóley Master" class="cancha-thumb">
+                        <div class="single-cancha-text">
+                            <strong>🏐 ARENA VÓLEY MASTER</strong>
+                            <small>80 Bs/hora • Red Ajustable Oficial</small>
+                        </div>
+                    </div>
+                    <div class="timer-corner-box">
+                        <div id="status-cancha-voley" class="status-pill disponible">
+                            <span id="lbl-status-voley">🟢 Libre</span>
+                            <span id="timer-ocupado-voley" class="timer-tag" style="display:none;"> | ⏳ 00:00:00</span>
+                        </div>
+                        <button id="btn-iniciar-timer-voley" class="btn-timer-mini spawn-balloon">⏱️ 10 min</button>
+                        <div id="display-timer-confirm-voley" class="timer-mini-display" style="display:none;">
+                            ⏳ <strong id="time-left-voley">10:00</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-layout">
+                    <div class="col-section">
+                        <h4 class="col-title">⚙️ 1. Horarios y Modo</h4>
+                        <div class="modo-pago-selector">
+                            <button class="btn-modo active spawn-balloon" data-sport="voley" data-modo="individual">👥 Individual</button>
+                            <button class="btn-modo spawn-balloon" data-sport="voley" data-modo="conjunto">💳 Conjunto</button>
+                        </div>
+                        <div class="input-compact-grid">
+                            <div class="field-mini"><label>📅 Fecha:</label><input type="date" id="fecha-voley"></div>
+                            <div class="field-mini"><label>⏰ Hora:</label><input type="time" id="hora-voley" readonly></div>
+                        </div>
+
+                        <div class="horarios-container">
+                            <label class="section-sublabel">⚡ Slots Disponibles:</label>
+                            <div class="slots-grid" data-sport="voley">
+                                <button class="slot-btn active spawn-balloon" data-time="15:00">15:00</button>
+                                <button class="slot-btn spawn-balloon" data-time="16:00">16:00</button>
+                                <button class="slot-btn spawn-balloon" data-time="17:00">17:00</button>
+                                <button class="slot-btn spawn-balloon" data-time="18:00">18:00</button>
+                            </div>
+                        </div>
+
+                        <div id="summary-voley" class="summary-box">
+                            <p id="row-cuota-voley">Cuota: <strong id="cuota-persona-voley">0.00</strong> Bs</p>
+                            <p id="row-total-voley" style="display:none;">Total Cancha: <strong id="monto-total-conjunto-voley">80.00</strong> Bs</p>
+                        </div>
+                    </div>
+
+                    <div class="col-section">
+                        <div id="panel-individual-voley" class="sub-panel-active">
+                            <div class="col-header-flex">
+                                <h4 class="col-title">📋 2. Integrantes</h4>
+                                <span class="badge-count"><span id="total-jugadores-voley">0</span>/16</span>
+                            </div>
+                            <div class="input-group-mini">
+                                <input type="text" id="nombre-jugador-voley" placeholder="Nombre jugador..." maxlength="25">
+                                <button id="btn-anotar-voley" class="spawn-balloon">➕</button>
+                            </div>
+                            <div class="scroll-list-wrapper">
+                                <ul id="lista-jugadores-voley" class="player-list-mini"></ul>
+                            </div>
+                        </div>
+                        <div id="panel-conjunto-voley" class="sub-panel-hidden" style="display:none;">
+                            <h4 class="col-title">👑 2. Responsable / Capitán</h4>
+                            <div class="field-mini-block">
+                                <label>Nombre del Capitán / Equipo:</label>
+                                <input type="text" id="nombre-capitan-voley" placeholder="Ej. Vóley Master" maxlength="35">
+                            </div>
+                            <div class="info-card-conjunto">
+                                <p>⚡ <strong>Pago Directo:</strong> El responsable cubre el total del alquiler.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-section">
+                        <h4 class="col-title">💳 3. Confirmación</h4>
+                        <div class="payment-mini-options">
+                            <button class="pay-btn-mini active-pay spawn-balloon" data-sport="voley" data-method="qr">📲 QR</button>
+                            <button class="pay-btn-mini spawn-balloon" data-sport="voley" data-method="efectivo">💵 Efectivo</button>
+                        </div>
+                        <div id="qr-container-voley" class="qr-box-mini">
+                            <div class="qr-code-placeholder-mini">
+                                <div class="qr-fake-art"></div>
+                                <span>[ 📷 ESCANEAR QR ]</span>
+                            </div>
+                            <p>Total a Pagar: <strong id="monto-qr-voley">0.00</strong> Bs</p>
+                            <button class="confirm-btn-mini spawn-balloon" data-sport="voley">✔ Validar QR</button>
+                        </div>
+                        <div class="finalizar-container-mini">
+                            <button id="btn-finalizar-voley" class="btn-finalizar-reserva-mini spawn-balloon">🏆 RESERVAR AHORA</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
